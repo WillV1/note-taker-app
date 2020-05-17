@@ -12,13 +12,13 @@ app.use(express.json());
 //* GET `/notes` - Should return the `notes.html` file.
 
 app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "notes.html"));
+    res.sendFile(path.join(__dirname, "./develop/public/notes.html"));
   });
 
 //* GET `*` - Should return the `index.html` file
 
 app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html")); 
+    res.sendFile(path.join(__dirname, "./develop/public/index.html")); 
   });
 
 //   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
