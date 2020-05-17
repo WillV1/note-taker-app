@@ -9,6 +9,8 @@ const PORT = 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+
 //* GET `/notes` - Should return the `notes.html` file.
 
 app.get("/notes", function(req, res) {
@@ -23,9 +25,10 @@ app.get("*", function(req, res) {
 
 //   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
 
-let notes = fs.readFileSync('./develop/db/db.json');
+ let notes = JSON.parse(fs.readFileSync('./develop/db/db.json', 'utf8'));
+ console.log(notes)
 app.get("/api/notes", function(req, res) {
-    return res.json(notes);
+    res.json(notes);
   });
 
 //   * POST `/api/notes` - Should receive a new note to save on the request body, add it to the `db.json` file, 
@@ -42,7 +45,7 @@ app.post("/api/notes", function(req, res) {
     notes.push(newNote);
   
     // We then display the JSON to the users
-    res.json(newNote);
+    res.json(true);
   });
 
 //   * DELETE `/api/notes/:id` - Should receive a query parameter containing the id of a note to delete. 
