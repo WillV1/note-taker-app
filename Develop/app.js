@@ -1,6 +1,7 @@
 const express = require("express");
-const fs = require("fs");
 const path = require("path");
+const fs = require("fs");
+
 
 // let listArray = [];
 
@@ -10,12 +11,18 @@ const PORT = 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(express.static(__dirname + '/public'));
 
+//   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
 
-app.listen(PORT, function() {
-  console.log("App listening on PORT " + PORT);
-});
+let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+console.log(notes)
+app.get("/api/notes", function(req, res) {
+ // let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+   return res.json(notes);
+ });
+
 
 //* GET `/notes` - Should return the `notes.html` file.
 
@@ -23,21 +30,13 @@ app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
   });
 
+
 //* GET `*` - Should return the `index.html` file
 
 app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html")); 
-  });
+  res.sendFile(path.join(__dirname, "./public/index.html")); 
+});
 
-  
-//   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
-
- let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
- console.log(notes)
-app.get("/api/notes", function(req, res) {
-  // let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-    return res.json(notes);
-  });
 
 //   * POST `/api/notes` - Should receive a new note to save on the request body, add it to the `db.json` file, 
 // and then return the new note to the client.
@@ -63,3 +62,8 @@ app.post("/api/notes", function(req, res) {
 // In order to delete a note, you'll need to read all notes from the `db.json` file, 
 // remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
 
+
+
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
