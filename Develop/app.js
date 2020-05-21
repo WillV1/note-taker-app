@@ -1,5 +1,5 @@
 const express = require("express");
-
+const path = require('path');
 
 
 // const path = require("path");
@@ -10,20 +10,22 @@ const express = require("express");
 // let listArray = [];
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname + '/public')));
 
 
 
-const apiRoutes = require("./api")
-const htmlRoutes = require("./html")
-app.use('/', apiRoutes);
-app.use('/', htmlRoutes);
+
+
+// const apiRoutes = require("./api")
+// const htmlRoutes = require("./html")
+// app.use('/', apiRoutes);
+// app.use('/', htmlRoutes);
 
 //   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
 
@@ -76,6 +78,8 @@ app.use('/', htmlRoutes);
 // This means you'll need to find a way to give each note a unique `id` when it's saved. 
 // In order to delete a note, you'll need to read all notes from the `db.json` file, 
 // remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
+require('./api.js')(app);
+require('./html.js')(app);
 
 
 app.listen(PORT, function() {
