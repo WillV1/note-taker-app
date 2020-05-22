@@ -43,11 +43,11 @@ module.exports = function (app) {
       .then(noteList => {
         console.log(noteList)
         return (JSON.parse(noteList))
-        res.json(JSON.parse(noteList))
+       
       })
       .catch(err => console.log(err))
 
-      return (JSON.parse(noteList))
+     
     }
 
       (JSON.parse(noteList)).push(newNote);
@@ -66,3 +66,10 @@ module.exports = function (app) {
 
 
 }
+
+// Receive info id of note
+// Read File
+// Parse info
+// Delete instanceof
+// stringify
+// Rewrite
