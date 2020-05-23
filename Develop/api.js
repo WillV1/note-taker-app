@@ -15,7 +15,7 @@ module.exports = function (app) {
 
   app.get("/api/notes", function (req, res) {
 
-    (readFileSync('./db/db.json', 'utf8'))
+    (readFileSync('./Develop/db/db.json', 'utf8'))
       .then(noteList => {
 
         console.log(noteList, "data-two")
@@ -41,14 +41,14 @@ module.exports = function (app) {
     let new_property = { "id": n }
 
     let new_object = [{ "title": req.body.title, "text": req.body.text, ...new_property }]
-    let notes_string = await readFileSync("./db/db.json", "utf8");
+    let notes_string = await readFileSync("./Develop/db/db.json", "utf8");
 
     let notes = JSON.parse(notes_string);
  
     notes.push(new_object[0])
     let new_notes = JSON.stringify(notes)
 
-    await writeFileSync('./db/db.json', new_notes, "utf8");
+    await writeFileSync('./Develop/db/db.json', new_notes, "utf8");
 
     console.log(new_notes, "data");
     res.json(new_notes);
@@ -64,7 +64,7 @@ module.exports = function (app) {
 
     let noteID  = req.params.id;
 
-    let full_string = await readFileSync("./db/db.json", "utf8");
+    let full_string = await readFileSync("./Develop/db/db.json", "utf8");
 
     let notes = JSON.parse(full_string);
 
@@ -72,7 +72,7 @@ module.exports = function (app) {
 
     let note = notes.filter(note => {
       return note.id == noteID;
-    });[0];
+    });
 
     let noteIndex = notes.indexOf(note);
  
@@ -80,7 +80,7 @@ module.exports = function (app) {
 
     let new_notes = JSON.stringify(notes)
 
-    await writeFileSync('./db/db.json', new_notes, "utf8");
+    await writeFileSync('./Develop/db/db.json', new_notes, "utf8");
 
     res.send("Item deleted");
   });
