@@ -68,25 +68,14 @@ module.exports = function (app) {
 
     let notes = JSON.parse(full_string);
 
-    // let id = parseInt(id);
 
-    // let note = notes.filter(note => {
-    //   return note.id == noteID;
-    // });
+    let note = notes.filter(note => {
+      return note.id !== noteID;
+    });
 
-    for (let i = 0; i < notes.length; i++) {
-     let removeNote =  notes[i].id == noteID
-    
-
-    let noteIndex = notes.indexOf(removeNote);
- 
-    notes.splice(noteIndex, 1);
-
-    let new_notes = JSON.stringify(notes)
+    let new_notes = JSON.stringify(note)
 
     await writeFileSync('./Develop/db/db.json', new_notes, "utf8");
-
-    }
 
     res.send("Item deleted");
   });
