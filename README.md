@@ -5,7 +5,7 @@
 
 ## Description
   
-This is an application that allows the user to create short, pertinent notes.
+This is an application that allows the user to create short, pertinent notes for the user, based on business context needs. This application uses an express backend, saves and retrieves note data from a JSON file.
 
 ## Table of Contents
 
