@@ -1,0 +1,26 @@
+{
+  "name": "note-taker-app",
+  "version": "1.0.0",
+  "description": "An application allowing the user to create, list and delete pertinent notes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "William VanHook",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillV1/note-taker-app.git"
+  },
+  "keywords": [
+    "note-taker",
+    "express"
+  ],
+  "bugs": {
+    "url": "https://github.com/WillV1/note-taker-app/issues"
+  },
+  "homepage": "https://github.com/WillV1/note-taker-app#readme"
+}
