@@ -18,7 +18,7 @@ module.exports = function (app) {
     (readFileSync('./Develop/db/db.json', 'utf8'))
       .then(noteList => {
 
-        console.log(noteList, "data-two")
+        // console.log(noteList, "data-two")
         res.json(JSON.parse(noteList))
       })
       .catch(err => console.log(err))
@@ -33,10 +33,10 @@ module.exports = function (app) {
   app.post("/api/notes", async function (req, res) {
 
     let newNote = req.body;
-    console.log(newNote);
+    // console.log(newNote);
 
-    var num = Math.floor(Math.random() * 100 + 1);
-    var n = num.toString();
+    let num = Math.floor(Math.random() * 100 + 1);
+    let n = num.toString();
 
     let new_property = { "id": n }
 
@@ -50,7 +50,7 @@ module.exports = function (app) {
 
     await writeFileSync('./Develop/db/db.json', new_notes, "utf8");
 
-    console.log(new_notes, "data");
+    // console.log(new_notes, "data");
     res.json(new_notes);
 
   });
@@ -70,17 +70,23 @@ module.exports = function (app) {
 
     // let id = parseInt(id);
 
-    let note = notes.filter(note => {
-      return note.id == noteID;
-    });
+    // let note = notes.filter(note => {
+    //   return note.id == noteID;
+    // });
 
-    let noteIndex = notes.indexOf(note);
+    for (let i = 0; i < notes.length; i++) {
+     let removeNote =  notes[i].id == noteID
+    
+
+    let noteIndex = notes.indexOf(removeNote);
  
     notes.splice(noteIndex, 1);
 
     let new_notes = JSON.stringify(notes)
 
     await writeFileSync('./Develop/db/db.json', new_notes, "utf8");
+
+    }
 
     res.send("Item deleted");
   });
